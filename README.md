@@ -1,2 +1,2 @@
-# enlighten
+# Prosvita
 Online Publishing Platform
