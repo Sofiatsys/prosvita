@@ -45,6 +45,18 @@ public class ProsvitaApplication {
 
         // INSERT
         //userRepository.save(new User("janeeyre", "Jane", "Eyre", "jane.eyre@gmail.com", "hashed_password"));
+        // instead of constructor used a builder
+		/*userRepository.save(User.builder()
+				.username("janeeyre")
+				.name("Jane")
+				.surname("Eyre")
+				.email("jane.eyre@gmail.com")
+				.password("hashed_password")
+				.role(Role.USER)
+				.status(Status.ACTIVE)
+				.createdAt(new Timestamp(System.currentTimeMillis()))
+				.updatedAt(new Timestamp(System.currentTimeMillis()))
+				.build());*/
         userRepository.findByEmail("jane.eyre@gmail.com").ifPresent(System.out::println);
 
         // DELETE
@@ -66,9 +78,10 @@ public class ProsvitaApplication {
         System.out.println(isValidLogin);
         userRepository.findUserByEmailAndPassword("admin@example.com", "adminpassword").ifPresent(System.out::println);
 
-        // USERSERVICE
-        UserService userService = new UserService(userRepository);
-        System.out.println(userService.loadUserByUsername("alice@example.com"));
-        System.out.println(userService.loadUserByUsername("noname@example.com"));
+        // resolve conflict with loaduser
+//        // USERSERVICE
+//        UserService userService = new UserService(userRepository);
+//        System.out.println(userService.loadUserByUsername("alice@example.com"));
+//        System.out.println(userService.loadUserByUsername("noname@example.com"));
     }
 }

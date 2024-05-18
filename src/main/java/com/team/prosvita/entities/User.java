@@ -1,6 +1,10 @@
 package com.team.prosvita.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +16,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,150 +48,8 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
 
-    public User() {
-
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User(String username, String name, String surname, String email, String password) {
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
-
-
-    public User(int id, String username, String name, String surname, String email, String password, String gender, String bio, String profilePicture, Role role, boolean isConsultant, Status status, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.gender = gender;
-        this.bio = bio;
-        this.profilePicture = profilePicture;
-        this.role = role;
-        this.isConsultant = isConsultant;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public boolean isConsultant() {
-        return isConsultant;
-    }
-
-    public void setConsultant(boolean consultant) {
-        isConsultant = consultant;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    //After implementation of email confirmation add = false
+    private Boolean enabled = true;
     @Override
     public String getPassword() {
         return password;
@@ -205,7 +71,8 @@ public class User implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         // todo? as class field
-        return false; // locked
+        // return false; // locked
+        return true;
     }
 
     @Override
@@ -219,36 +86,15 @@ public class User implements UserDetails {
         return true; // enabled
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                ", bio='" + bio + '\'' +
-                ", profilePicture='" + profilePicture + '\'' +
-                ", role=" + role +
-                ", isConsultant=" + isConsultant +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && isConsultant == user.isConsultant && Objects.equals(username, user.username) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(gender, user.gender) && Objects.equals(bio, user.bio) && Objects.equals(profilePicture, user.profilePicture) && role == user.role && status == user.status && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, name, surname, email, password, gender, bio, profilePicture, role, isConsultant, status, createdAt, updatedAt);
+    public User(String name, String surname, String username, String email, String password, Role role) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
+        //enabled = true?
     }
 }
