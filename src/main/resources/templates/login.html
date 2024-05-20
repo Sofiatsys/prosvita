@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-<h1>Login</h1>
-<form method="post" action="/auth/login">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <button type="submit">Login</button>
-
-  <h2>Don't have an account yet?</h2>
-  <a href="/registration/register">Register</a>
-</form>
+<div class="container">
+  <img src="/css/13399753_Work_7.jpg" alt="Login Image">
+</div>
+<div class="form-container">
+  <h1>Welcome to Prosvita!</h1>
+  <form method="post" action="/auth/login">
+    <div class="field">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="button-container">
+      <button type="submit">Log in</button>
+      <a href="/registration/register" class="back-link">Sign Up</a>
+    </div>
+  </form>
+</div>
 </body>
 </html>

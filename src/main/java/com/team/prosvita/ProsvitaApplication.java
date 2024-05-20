@@ -29,19 +29,7 @@ public class ProsvitaApplication {
         }
 
         // READ
-        // if Optional is returned, use get() to unpack it
-        // syntax option 1
         userRepository.findById(1).ifPresent(System.out::println);
-
-		/*// syntax option 2
-		Optional<User> user = userRepository.findById(1);
-		if (user.isPresent()) {
-			System.out.println(user.get());
-		}*/
-
-		/*// syntax option 3
-		Optional<User> user = userRepository.findById(1);
-		user.ifPresent(System.out::println);*/
 
         // INSERT
         //userRepository.save(new User("janeeyre", "Jane", "Eyre", "jane.eyre@gmail.com", "hashed_password"));
@@ -57,6 +45,7 @@ public class ProsvitaApplication {
 				.createdAt(new Timestamp(System.currentTimeMillis()))
 				.updatedAt(new Timestamp(System.currentTimeMillis()))
 				.build());*/
+
         userRepository.findByEmail("jane.eyre@gmail.com").ifPresent(System.out::println);
 
         // DELETE

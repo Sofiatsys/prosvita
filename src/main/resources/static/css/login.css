@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    justify-content: center; /* вирівнюємо все по центру */
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.container {
+    width: 45%;
+    margin-right: -10px; /* додаємо відступ між картинкою та текстом */
+}
+
+.container img {
+    width: 100%;
+    height: 100%;
+    margin-left: 15px;
+}
+
+.form-container {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* решта вашого CSS залишається без змін */
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+form {
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 3px;
+    text-align: left;
+}
+
+input[type="text"], input[type="password"] {
+    width: 500px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button {
+    background-color: #5C7AEA;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%; /* зменшено на 48% для урахування проміжку між кнопками */
+    box-sizing: border-box;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #5C7AEA;
+}
+
+a.back-link {
+    border: 2px solid #5C7AEA;
+    padding: 10px 0;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    color: #5C7AEA;
+    font-size: 20px;
+    text-align: center;
+    width: calc(48% - 22px); /* зменшено на 48% для урахування проміжку між кнопками */
+    box-sizing: border-box;
+    height: 50px;
+}

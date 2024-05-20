@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Register</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/register.css">
+
 </head>
 <body>
-<h1>Register</h1>
+<h1>Create your account</h1>
 <form method="post" th:action="@{/registration/register}" th:object="${registrationRequest}">
   <div>
     <label for="username">Username:</label>
@@ -34,6 +35,7 @@
     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
   </div>
   <button type="submit">Register</button>
+  <a href="/auth/login" class="back-link">Back</a>
   <div th:if="${errorMessage}">
     <p th:text="${errorMessage}" style="color: red;"></p>
   </div>
