@@ -31,9 +31,14 @@ public class UserService implements UserDetailsService {
 
     public String signUpUser(User user) {
         boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
+        boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
 
         if (userExists) {
             throw new IllegalStateException("Email already taken!");
+        }
+
+        if (usernameExists) {
+            throw new IllegalStateException("Username already taken!");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -46,6 +51,7 @@ public class UserService implements UserDetailsService {
         return "User registration successful";
     }
     public boolean isUserCredentialsValid(String email, String password) {
+        // add check for existence with username as well
         return userRepository.existsUserByEmailAndPassword(email, password);
     }
 }
