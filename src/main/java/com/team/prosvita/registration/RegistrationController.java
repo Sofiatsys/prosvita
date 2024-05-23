@@ -40,4 +40,13 @@ public class RegistrationController {
             return "register";
         }
     }
+
+    @GetMapping("/register/confirm")
+    public String confirm(@RequestParam("token") String token, Model model) {
+        log.info("Confirm method called with token: {}", token); // Added log statement
+        String result = registrationService.confirmToken(token);
+        model.addAttribute("message", result);
+        return "confirmation";
+    }
+
 }
