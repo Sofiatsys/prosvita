@@ -1,7 +1,7 @@
 package com.team.prosvita.service;
 
 import com.team.prosvita.entities.User;
-import com.team.prosvita.repository.IUserRepository;
+import com.team.prosvita.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private static final String USER_NOT_FOUND_MSG = "User %s not found!";
 
