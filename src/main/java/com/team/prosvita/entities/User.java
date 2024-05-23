@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -42,7 +41,7 @@ public class User implements UserDetails {
     private boolean isConsultant;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.ACTIVE;
+    private UserStatus status = UserStatus.ACTIVE;
     @Column(name = "created_at")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
     @Column(name = "updated_at")

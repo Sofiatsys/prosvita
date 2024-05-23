@@ -28,6 +28,9 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+    /*@Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ArticleStatus status;*/
     @Column(name = "created_at")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
     @Column(name = "updated_at")

@@ -1,5 +1,5 @@
 package com.team.prosvita.entities;
 
-public enum Status {
+public enum UserStatus {
     ACTIVE, INACTIVE, BANNED
 }
