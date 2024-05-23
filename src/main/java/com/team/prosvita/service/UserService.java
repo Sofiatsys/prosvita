@@ -1,6 +1,9 @@
 package com.team.prosvita.service;
 
 import com.team.prosvita.entities.User;
+import com.team.prosvita.registration.password.PasswordResetTokenService;
+import com.team.prosvita.registration.token.ConfirmationToken;
+import com.team.prosvita.registration.token.ConfirmationTokenService;
 import com.team.prosvita.repository.IUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +11,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
     private final IUserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
+
+    private final PasswordResetTokenService passwordResetTokenService;
+
     private static final String USER_NOT_FOUND_MSG = "User %s not found!";
 
     //    @Override
@@ -48,10 +60,30 @@ public class UserService implements UserDetailsService {
 
         // TODO: Send confirmation token (Anna)
 
-        return "User registration successful";
+        String token = UUID.randomUUID().toString();
+        // token valid for 15 min
+        ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15), user);
+
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        // TODO:Send email
+//        return "User registration successful";
+        return token;
     }
+
+    @Transactional
+    public int enableUser(String email){
+        return userRepository.enableUser(email);
+    }
+
     public boolean isUserCredentialsValid(String email, String password) {
         // add check for existence with username as well
         return userRepository.existsUserByEmailAndPassword(email, password);
+    }
+
+    public void createPasswordResetTokenForUser(User user, String passwordToken) {
+        passwordResetTokenService.createPasswordResetToken(user, passwordToken);
+
     }
 }
