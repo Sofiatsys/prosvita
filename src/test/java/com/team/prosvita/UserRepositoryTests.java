@@ -3,7 +3,7 @@ package com.team.prosvita;
 import com.team.prosvita.entities.Role;
 import com.team.prosvita.entities.User;
 
-import com.team.prosvita.repository.IUserRepository;
+import com.team.prosvita.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserRepositoryTests {
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
     @BeforeEach
     public void setUp() {
         User user = new User("name", "surname","testuser",

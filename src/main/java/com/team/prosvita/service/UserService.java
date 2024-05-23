@@ -1,10 +1,10 @@
 package com.team.prosvita.service;
 
 import com.team.prosvita.entities.User;
-import com.team.prosvita.registration.password.PasswordResetTokenService;
+// import com.team.prosvita.registration.password.PasswordResetTokenService;
 import com.team.prosvita.registration.token.ConfirmationToken;
 import com.team.prosvita.registration.token.ConfirmationTokenService;
-import com.team.prosvita.repository.IUserRepository;
+import com.team.prosvita.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,11 +20,11 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
-    private final PasswordResetTokenService passwordResetTokenService;
+//    private final PasswordResetTokenService passwordResetTokenService;
 
     private static final String USER_NOT_FOUND_MSG = "User %s not found!";
 
@@ -58,8 +58,6 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        // TODO: Send confirmation token (Anna)
-
         String token = UUID.randomUUID().toString();
         // token valid for 15 min
         ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(),
@@ -67,8 +65,6 @@ public class UserService implements UserDetailsService {
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-        // TODO:Send email
-//        return "User registration successful";
         return token;
     }
 
@@ -82,8 +78,8 @@ public class UserService implements UserDetailsService {
         return userRepository.existsUserByEmailAndPassword(email, password);
     }
 
-    public void createPasswordResetTokenForUser(User user, String passwordToken) {
+    /*public void createPasswordResetTokenForUser(User user, String passwordToken) {
         passwordResetTokenService.createPasswordResetToken(user, passwordToken);
 
-    }
+    }*/
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script th:src="@{/js/editor.js}"></script>
+    <script src="/js/editor.js"></script>
+    <title th:text="${article.title}"></title>
+</head>
+<body>
+    <h1>Article</h1>
+    <div id="article-content" th:attr="data-content=${article.content}"></div>
+</body>
+</html>
