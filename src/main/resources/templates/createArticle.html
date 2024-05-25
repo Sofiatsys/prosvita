@@ -5,13 +5,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
     <script th:src="@{/js/editor.js}"></script>
+
     <title>Write Article</title>
+    <style>
+        /* Стилі для попереднього перегляду зображення */
+        #image-preview {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #image-preview img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
 </head>
 <body>
-<form th:action="@{/articles}" th:object="${article}" method="post">
+<form th:action="@{/articles}" th:object="${article}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <label>
         Title:
-        <input type="text" th:field="*{title}" placeholder="Title" required/>
+        <input type="text" th:field="*{title}" placeholder="Title" required minlength="5"/>
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></div>
     </label>
     <label>
         Subject Area:
@@ -20,8 +34,69 @@
         </select>
     </label>
     <div id="article-content" th:data-state="${state}"></div>
-    <input type="hidden" th:field="*{content}" id="article-content-hidden"/>
-    <button type="submit">Publish</button>
+    <label>
+        Image:
+        <input type="file" name="imageFile" id="image-file" onchange="previewImage(this)">
+    </label>
+    <div id="image-preview">
+        <img id="preview">
+        <button type="button" id="remove-image" onclick="removeImage()">Remove Image</button>
+    </div>
+    <input type="hidden" th:field="*{content}" id="article-content-hidden" required/>
+    <button type="submit">Submit</button>
 </form>
+
+<script>
+    function validateForm() {
+        var content = document.getElementById('article-content-hidden').value;
+        var fileInput = document.getElementById('image-file');
+        var file = fileInput.files[0];
+
+        if (content.trim() === '') {
+            alert('Content field cannot be empty.');
+            return false; // Cancel form submission
+        }
+
+        if (!file) {
+            alert('Please select an image.');
+            return false; // Cancel form submission
+        }
+
+        return true; // Continue with form submission
+    }
+
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var previewContainer = document.getElementById('image-preview');
+        var file = input.files[0];
+
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            preview.src = reader.result;
+            previewContainer.style.display = 'block';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            previewContainer.style.display = null;
+        }
+    }
+
+    function removeImage() {
+        var preview = document.getElementById('preview');
+        var previewContainer = document.getElementById('image-preview');
+        var fileInput = document.getElementById('image-file');
+        var removeButton = document.getElementById('remove-image');
+
+        preview.src = '';
+        previewContainer.style.display = null;
+        fileInput.value = ''; // Clear file input
+        removeButton.style.display = 'none'; // Hide remove button
+    }
+</script>
+
 </body>
 </html>

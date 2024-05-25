@@ -1,7 +1,7 @@
 -- Updated: 22.05.2024
 
-DROP DATABASE IF EXISTS prosvita_db;
-CREATE DATABASE prosvita_db;
+-- DROP DATABASE IF EXISTS prosvita_db;
+CREATE DATABASE IF NOT EXIST prosvita_db;
 USE prosvita_db;
 
 CREATE TABLE `user` (

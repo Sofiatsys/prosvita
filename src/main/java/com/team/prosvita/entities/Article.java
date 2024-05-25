@@ -31,6 +31,10 @@ public class Article {
     /*@Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ArticleStatus status;*/
+
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
+
     @Column(name = "created_at")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
     @Column(name = "updated_at")

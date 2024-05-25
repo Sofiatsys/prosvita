@@ -1,0 +1,52 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px; /* Increased padding for more space from the edges */
+    background-color: #ffffff; /* White background color */
+    border-bottom: 1px solid #e7e7e7; /* Thin gray border at the bottom */
+}
+
+.header .title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 20px; /* Added margin for spacing */
+}
+
+.header .publish-button {
+    background-color: #5C7AEA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    /*margin-right: 20px; !* Added margin for spacing *!*/
+}
+
+.header .publish-button:hover {
+    background-color: #4a65d2;
+}
+
+.header .icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+.card {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #6c757d; /* Gray color for author */
+}
