@@ -1,7 +1,7 @@
 -- Updated: 22.05.2024
 
-DROP DATABASE IF EXISTS prosvita_db;
-CREATE DATABASE prosvita_db;
+-- DROP DATABASE IF EXISTS prosvita_db;
+CREATE DATABASE IF NOT EXISTs prosvita_db;
 USE prosvita_db;
 
 CREATE TABLE `user` (
@@ -51,6 +51,7 @@ CREATE TABLE article (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     subject_area_id SMALLINT UNSIGNED NOT NULL,
     title VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
     content JSON NOT NULL,
     owner_id INT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
