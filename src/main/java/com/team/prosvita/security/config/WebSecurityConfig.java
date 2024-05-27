@@ -28,7 +28,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/registration/register", "/register", "/registration/register/confirm",
-                                "/auth/**", "/css/**", "/js/**").permitAll()
+                                "/auth/**", "/css/**", "/js/**",
+                                "/reset-password","/reset-password/request","/reset-password/reset").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth/login")

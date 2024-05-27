@@ -1,9 +1,10 @@
 package com.team.prosvita.service;
 
 import com.team.prosvita.entities.User;
-// import com.team.prosvita.registration.password.PasswordResetTokenService;
 import com.team.prosvita.registration.token.ConfirmationToken;
 import com.team.prosvita.registration.token.ConfirmationTokenService;
+import com.team.prosvita.registration.token.PasswordResetToken;
+import com.team.prosvita.registration.token.PasswordResetTokenService;
 import com.team.prosvita.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
-//    private final PasswordResetTokenService passwordResetTokenService;
+    private final PasswordResetTokenService passwordResetTokenService;
 
     private static final String USER_NOT_FOUND_MSG = "User %s not found!";
 
@@ -78,8 +79,29 @@ public class UserService implements UserDetailsService {
         return userRepository.existsUserByEmailAndPassword(email, password);
     }
 
-    /*public void createPasswordResetTokenForUser(User user, String passwordToken) {
-        passwordResetTokenService.createPasswordResetToken(user, passwordToken);
+    public String resetPassword(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalStateException("User with this email does not exist!"));
 
-    }*/
+        String token = UUID.randomUUID().toString();
+        PasswordResetToken passwordResetToken = new PasswordResetToken(
+                token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(15), user);
+
+        passwordResetTokenService.savePasswordResetToken(passwordResetToken);
+
+        return token;
+    }
+
+    public void updatePassword(String token, String newPassword) {
+        PasswordResetToken passwordResetToken = passwordResetTokenService.getToken(token)
+                .orElseThrow(() -> new IllegalStateException("Invalid token"));
+
+        if (passwordResetToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Token has expired");
+        }
+
+        User user = passwordResetToken.getUser();
+        String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+        userRepository.updatePassword(user.getEmail(), encodedPassword);
+    }
 }

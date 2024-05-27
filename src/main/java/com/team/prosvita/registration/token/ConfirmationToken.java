@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-//TODO: Finish email confirmation implementation (Anna)
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
