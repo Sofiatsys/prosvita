@@ -1,0 +1,78 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px; /* Increased padding for more space from the edges */
+    background-color: #ffffff; /* White background color */
+    border-bottom: 1px solid #e7e7e7; /* Thin gray border at the bottom */
+}
+
+.header .title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 20px; /* Added margin for spacing */
+}
+
+.header .publish-button {
+    background-color: #5C7AEA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header .publish-button:hover {
+    background-color: #4a65d2;
+}
+
+.header .icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+/*#image-preview {*/
+/*    display: none;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*#image-preview img {*/
+/*    max-width: 200px;*/
+/*    max-height: 200px;*/
+/*}*/
+#article-content {
+width: 100%;
+    max-height: 400px; /* Set max height to enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    background-color: #f2f2f2; /* Gray background */
+    padding: 10px; /* Add a small padding */
+    border: 1px solid #ccc; /* Thin border */
+    box-sizing: border-box; /* Calculate size including borders and padding */
+    margin-bottom: 20px; /* Add bottom margin */
+}
+/* Менше по висоті для зображення та кнопок */
+#image-preview img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#image-preview {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 20px; /* Додамо зазор внизу */
+}
+
+/* Для кнопок Submit та Remove Image */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Рівномірно розподіляємо простір між ними */
+    margin-bottom: 20px; /* Зазор внизу */
+}
+
+.button-container button {
+    width: 48%; /* Робимо кнопки меншими по ширині та вирівнюємо по центру */
+}

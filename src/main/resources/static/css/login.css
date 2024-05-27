@@ -1,6 +1,6 @@
 body {
     display: flex;
-    justify-content: center; /* вирівнюємо все по центру */
+    justify-content: center;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     padding: 20px;
@@ -8,7 +8,7 @@ body {
 
 .container {
     width: 45%;
-    margin-right: -10px; /* додаємо відступ між картинкою та текстом */
+    margin-right: -10px;
 }
 
 .container img {
