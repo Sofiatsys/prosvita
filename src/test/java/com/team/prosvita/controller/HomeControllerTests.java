@@ -1,6 +1,5 @@
-package com.team.prosvita;
+package com.team.prosvita.controller;
 
-import com.team.prosvita.controller.HomeController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

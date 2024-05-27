@@ -3,6 +3,7 @@ package com.team.prosvita.controller;
 import com.team.prosvita.entities.Article;
 import com.team.prosvita.entities.User;
 import com.team.prosvita.service.ArticleService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class ArticleController {
 
     private final ArticleService articleService;
+    @Setter
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -57,13 +59,13 @@ public class ArticleController {
         // Handle image upload and save the URL to the article
         if (!imageFile.isEmpty()) {
             File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
             String uuidFile = UUID.randomUUID().toString();
-           String resultFilename= uuidFile +imageFile.getOriginalFilename();
+            String resultFilename = uuidFile + imageFile.getOriginalFilename();
             //String imageUrl = "/path/to/upload/directory/" + imageFile.getOriginalFilename();
-           imageFile.transferTo(new File(uploadPath+"/"+resultFilename));
+            imageFile.transferTo(new File(uploadPath + "/" + resultFilename));
             article.setImageUrl(resultFilename);
         }
 
@@ -71,4 +73,5 @@ public class ArticleController {
         articleService.save(article);
         return "redirect:/home";
     }
+
 }

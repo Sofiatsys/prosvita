@@ -1,9 +1,8 @@
-package com.team.prosvita;
+package com.team.prosvita.repository;
 
 import com.team.prosvita.entities.Role;
 import com.team.prosvita.entities.User;
 
-import com.team.prosvita.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
