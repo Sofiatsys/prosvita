@@ -50,7 +50,7 @@ public class RegistrationService {
         String token = userService.signUpUser(newUser);
         String link = "http://localhost:8080/registration/register/confirm?token=" + token;
 
-        emailSender.send(request.getEmail(), buildEmail(request.getName(), link));
+        emailSender.sendEmailConfirmation(request.getEmail(), buildEmail(request.getName(), link));
 
         log.info("Registering user: {}", request.getEmail());
         log.info("Generated confirmation token: {}", token);
