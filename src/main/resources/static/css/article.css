@@ -1,3 +1,5 @@
+/* CSS styles */
+/* CSS styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -35,34 +37,29 @@
     cursor: pointer;
     margin-left: 20px;
 }
-
-.card {
-    margin-bottom: 20px;
+.container {
+    max-width: 800px; /* Set maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 15px; /* Add padding to keep content away from edges */
 }
 
-.card-title {
-    font-size: 18px;
-    font-weight: bold;
+.article_content {
+    margin-top: 20px;
+    padding: 20px;
+
+
 }
 
-.card-text {
-    font-size: 14px;
-    color: #6c757d; /* Gray color for author */
-}
-
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.view-button {
-    width: 30%;
+.back_button {
+    /*margin-top: -600px; !* Add margin to separate it from the article content *!*/
+    margin-left: 60px;
     background-color: #5C7AEA;
+    width: 20%;
     color: white;
-}
-
-.view-button:hover {
-    background-color: #4a65d2;
-    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
 }
