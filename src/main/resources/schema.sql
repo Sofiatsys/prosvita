@@ -1,6 +1,6 @@
 -- Updated: 22.05.2024
 
--- DROP DATABASE IF EXISTS prosvita_db;
+DROP DATABASE IF EXISTS prosvita_db;
 CREATE DATABASE IF NOT EXISTs prosvita_db;
 USE prosvita_db;
 
