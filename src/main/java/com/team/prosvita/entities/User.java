@@ -48,7 +48,8 @@ public class User implements UserDetails {
     private Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
 
     //After implementation of email confirmation add = false
-    private Boolean enabled = true;
+    private Boolean enabled = false;
+
     @Override
     public String getPassword() {
         return password;
@@ -82,7 +83,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         // todo? as class field
-        return true; // enabled
+        return enabled; // enabled
     }
 
     public User(String name, String surname, String username, String email, String password, Role role) {

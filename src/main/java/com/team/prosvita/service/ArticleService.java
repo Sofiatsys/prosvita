@@ -22,8 +22,7 @@ public class ArticleService {
         this.subjectAreaRepository = subjectAreaRepository;
     }
 
-    public List<SubjectArea> getAllSubjectAreas() {
-        return subjectAreaRepository.findAll();
+    public List<SubjectArea> getAllSubjectAreas() {return subjectAreaRepository.findAll();
     }
 
     public List<Article> getAllArticles() {

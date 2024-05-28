@@ -13,7 +13,7 @@ VALUES ('Machine Learning'),
        ('Data Science'),
        ('Artificial Intelligence');
 
-INSERT INTO article (title, subject_area_id, content, owner_id)
+INSERT INTO article (title, subject_area_id, content, owner_id, image_url)
 VALUES ('An In-depth Guide to Machine Learning',
         1,
         '{
@@ -61,4 +61,5 @@ VALUES ('An In-depth Guide to Machine Learning',
             ],
             "version": "2.22.2"
         }',
-        1);
+        1,
+        '5f3de55d-7def-474e-bfa8-7cd0a740dfffcommunication.png');

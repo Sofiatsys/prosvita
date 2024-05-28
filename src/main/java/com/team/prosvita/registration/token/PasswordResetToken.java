@@ -1,19 +1,19 @@
 package com.team.prosvita.registration.token;
 
 import com.team.prosvita.entities.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "confirmation_token")
-public class ConfirmationToken {
+@Table(name = "password_reset_token")
+public class PasswordResetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,25 +28,26 @@ public class ConfirmationToken {
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
-    private LocalDateTime confirmedAt;
+    private LocalDateTime resetAt;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, LocalDateTime confirmedAt,
-                             User user) {
+    public PasswordResetToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt,
+                              LocalDateTime resetAt, User user) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.confirmedAt = confirmedAt;
+        this.resetAt = resetAt;
         this.user = user;
     }
 
-    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, User user) {
+    public PasswordResetToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, User user) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
         this.user = user;
     }
+
 }

@@ -30,7 +30,9 @@ public class WebSecurityConfig {
                 .authenticationProvider(daoAuthenticationProvider())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/registration/register", "/register", "/auth/**", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/registration/register", "/register", "/registration/register/confirm",
+                                "/auth/**", "/css/**", "/js/**",
+                                "/reset-password","/reset-password/request","/reset-password/reset").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth/login")
@@ -40,6 +42,8 @@ public class WebSecurityConfig {
                         .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/auth/login?logout")
                         .permitAll());
+        //TODO: Add remember me
+
         return http.build();
     }
 

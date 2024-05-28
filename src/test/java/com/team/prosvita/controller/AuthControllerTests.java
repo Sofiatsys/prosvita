@@ -1,29 +1,32 @@
-package com.team.prosvita;
+package com.team.prosvita.controller;
 
-import com.team.prosvita.controller.HomeController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HomeControllerTests {
+public class AuthControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private HomeController homeController;
+    private AuthController authController;
     @Test
-    @WithMockUser
-    public void testHomeController() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/home"))
+    public void testAuthControllerLoginPage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/auth/login"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("home"));
+                .andExpect(MockMvcResultMatchers.view().name("login"));
     }
 
+    @Test
+    public void testAuthControllerLogout() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/auth/logout"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/auth/login?logout"));
+    }
 }

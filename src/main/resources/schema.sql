@@ -1,7 +1,7 @@
 -- Updated: 22.05.2024
 
 -- DROP DATABASE IF EXISTS prosvita_db;
-CREATE DATABASE IF NOT EXIST prosvita_db;
+CREATE DATABASE IF NOT EXISTs prosvita_db;
 USE prosvita_db;
 
 CREATE TABLE `user` (
@@ -32,6 +32,16 @@ CREATE TABLE confirmation_token (
                                     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+CREATE TABLE password_reset_token (
+                                      id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                      token VARCHAR(255) NOT NULL,
+                                      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                      expires_at TIMESTAMP NOT NULL,
+                                      reset_at TIMESTAMP NULL,
+                                      user_id INT UNSIGNED NOT NULL,
+                                      FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
 CREATE TABLE subject_area (
                               id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                               name VARCHAR(255) NOT NULL
@@ -41,6 +51,7 @@ CREATE TABLE article (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     subject_area_id SMALLINT UNSIGNED NOT NULL,
     title VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
     content JSON NOT NULL,
     owner_id INT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
