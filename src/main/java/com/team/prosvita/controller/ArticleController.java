@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -103,6 +105,18 @@ public class ArticleController {
 
         article.setOwner(activeUser);
         articleService.update(article);
+        return "redirect:/home";
+    }
+    @PostMapping("/delete/{id}")
+    public String deleteArticle(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Optional<Article> optionalArticle = articleService.getArticleById(id);
+
+        if (optionalArticle.isPresent()) {
+            articleService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Article deleted successfully.");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Article not found.");
+        }
         return "redirect:/home";
     }
 }
