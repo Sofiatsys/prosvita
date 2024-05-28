@@ -34,6 +34,8 @@
 <div class="container">
     <div id="article-content" class="article_content" th:attr="data-content=${article.content}" th:data-state="${state}" ></div>
     <a href="/home" class="back_button btn btn-primary me-3">Back</a>
+<!--TODO: check here path    >-->
+    <a th:href="@{/articles/edit/{id}(id=${article.id})}" th:if="${currentUserId} == ${article.owner.id}" class="back_button btn btn-primary me-3">Edit</a>
 </div>
 
 
