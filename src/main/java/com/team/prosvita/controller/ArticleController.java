@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -74,4 +76,47 @@ public class ArticleController {
         return "redirect:/home";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editArticleForm(@PathVariable Long id, Model model) {
+        Article article = articleService.getArticleById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid article Id:" + id));
+        model.addAttribute("article", article);
+        model.addAttribute("subjectAreas", articleService.getAllSubjectAreas());
+        model.addAttribute("state", "edit");
+        return "edit-article";
+    }
+
+    @PostMapping("/update")
+    public String updateArticle(@ModelAttribute Article article, @RequestParam("imageFile") MultipartFile imageFile, @AuthenticationPrincipal User activeUser) throws IOException {
+        if (!imageFile.isEmpty()) {
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + imageFile.getOriginalFilename();
+            imageFile.transferTo(new File(uploadPath + "/" + resultFilename));
+            article.setImageUrl(resultFilename);
+        } else {
+            Article existingArticle = articleService.getArticleById(article.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid article Id:" + article.getId()));
+            article.setImageUrl(existingArticle.getImageUrl());
+        }
+
+        article.setOwner(activeUser);
+        articleService.update(article);
+        return "redirect:/home";
+    }
+    @PostMapping("/delete/{id}")
+    public String deleteArticle(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Optional<Article> optionalArticle = articleService.getArticleById(id);
+
+        if (optionalArticle.isPresent()) {
+            articleService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Article deleted successfully.");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Article not found.");
+        }
+        return "redirect:/home";
+    }
 }

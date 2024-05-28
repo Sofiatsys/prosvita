@@ -1,8 +1,10 @@
 package com.team.prosvita.controller;
 
 import com.team.prosvita.entities.Article;
+import com.team.prosvita.entities.User;
 import com.team.prosvita.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +33,22 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public String getArticle(@PathVariable Long id, Model model) {
         Article article = articleService.getArticleById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid article Id:" + id));
         model.addAttribute("article", article);
         model.addAttribute("state", "read");
+        return "article";
+    }*/
+
+    @GetMapping("/{id}")
+    public String getArticle(@PathVariable Long id, Model model, @AuthenticationPrincipal User activeUser) {
+        Article article = articleService.getArticleById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid article Id:" + id));
+        model.addAttribute("article", article);
+        model.addAttribute("state", "read");
+        model.addAttribute("currentUserId", activeUser.getId()); // record current id of user to know if it is the users article
         return "article";
     }
 }
