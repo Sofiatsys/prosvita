@@ -27,16 +27,14 @@
         </div>
     </div>
 </header>
-
-<div class="container mt-5">
+<<div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             <form th:action="@{/articles}" th:object="${article}" method="post" enctype="multipart/form-data"
                   onsubmit="return validateForm()">
                 <label>
                     Title:
-                    <input type="text" th:field="*{title}" class="form-control" placeholder="Title" required
-                           minlength="5"/>
+                    <input type="text" th:field="*{title}" class="form-control" placeholder="Title" required minlength="5"/>
                     <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></div>
                 </label>
                 <label>
@@ -48,19 +46,17 @@
                 </label>
                 <label>
                     Image:
-                    <input type="file" name="imageFile" id="image-file" onchange="previewImage(this)"
-                           class="form-control">
+                    <input type="file" name="imageFile" id="image-file" onchange="previewImage(this)" class="form-control">
                 </label>
                 <div id="image-preview" class="mt-3">
                     <img id="preview" class="img-fluid">
-                    <button type="button" id="remove-image" onclick="removeImage()" class="btn btn-danger mt-2">Remove
-                        Image
-                    </button>
+                    <button type="button" id="remove-image" onclick="removeImage()" class="btn btn-danger mt-2">Remove Image</button>
                 </div>
                 <input type="hidden" th:field="*{content}" id="article-content-hidden" required/>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
-
         </div>
         <div class="col-md-6 bg-light p-3">
             <h2 class="text-center mb-4">Input Text</h2>
@@ -68,6 +64,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     function validateForm() {

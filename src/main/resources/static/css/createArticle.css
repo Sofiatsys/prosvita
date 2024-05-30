@@ -76,3 +76,16 @@ width: 100%;
 .button-container button {
     width: 48%; /* Робимо кнопки меншими по ширині та вирівнюємо по центру */
 }
+.btn-primary{
+    background-color: #5C7AEA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+.btn-primary:hover{
+    background-color: #4a65d2;
+}

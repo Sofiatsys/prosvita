@@ -28,15 +28,23 @@
     </div>
 </header>
 
-<h1 th:text="${article.title}" style="text-align: center; font-weight: bold;"></h1>
+<div class="header-container">
+    <a href="/home" class="back_button me-3">
+        <img src="/css/free-icon-right-arrow-109617.png" alt="Back" style="height: 30px; width: 30px; transform: rotate(180deg);">
+    </a>
+    <div class="title-container">
+        <h1 th:text="${article.title}" class="article-title">Заголовок статті</h1>
+    </div>
+</div>
+
 
 <div class="container">
     <div id="article-content" class="article_content" th:attr="data-content=${article.content}" th:data-state="${state}"></div>
-    <a href="/home" class="back_button btn btn-primary me-3">Back</a>
 
-    <a th:href="@{/articles/edit/{id}(id=${article.id})}" th:if="${currentUserId} == ${article.owner.id}" class="back_button btn btn-primary me-3">Edit</a>
 
-    <a href="#" th:if="${currentUserId} == ${article.owner.id}" class="back_button btn btn-danger me-3" onclick="document.getElementById('delete-form').submit(); return false;">Delete</a>
+    <a th:href="@{/articles/edit/{id}(id=${article.id})}" th:if="${currentUserId} == ${article.owner.id}" class="button btn btn-primary me-1">Edit</a>
+
+    <a href="#" th:if="${currentUserId} == ${article.owner.id}" class="button btn btn-danger me-1" onclick="document.getElementById('delete-form').submit(); return false;">Delete</a>
     <form id="delete-form" th:action="@{/articles/delete/{id}(id=${article.id})}" method="post" style="display: none;">
         <input type="hidden" name="_method" value="delete" />
     </form>
