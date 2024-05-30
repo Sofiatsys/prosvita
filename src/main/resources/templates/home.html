@@ -10,7 +10,9 @@
 <header class="header d-flex justify-content-between align-items-center bg-white border-bottom">
     <div class="title ms-3">Prosvita</div>
     <div class="d-flex align-items-center me-3">
-        <a href="/articles/create" class="publish-button btn btn-primary me-3">Publish</a>
+        <a th:unless="${isAdmin}" href="/articles/create" class="publish-button btn btn-primary me-3">Publish</a>
+
+        <a th:if="${isAdmin}" href="#" class="verify-button btn btn-primary me-3">Verify</a>
         <div class="dropdown">
             <a href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="/css/user.png" alt="Icon" class="icon">

@@ -32,6 +32,10 @@ public class Article {
     @Enumerated(EnumType.STRING)
     private ArticleStatus status;*/
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status articleStatus;
+
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
 

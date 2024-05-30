@@ -14,7 +14,7 @@
     margin-right: 20px; /* Added margin for spacing */
 }
 
-.header .publish-button {
+.header .publish-button, .verify-button {
     background-color: #5C7AEA;
     color: white;
     padding: 10px 20px;
@@ -26,6 +26,10 @@
 }
 
 .header .publish-button:hover {
+    background-color: #4a65d2;
+}
+
+.header .verify-button:hover {
     background-color: #4a65d2;
 }
 

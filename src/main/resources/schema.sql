@@ -59,3 +59,19 @@ CREATE TABLE article (
     FOREIGN KEY (subject_area_id) REFERENCES subject_area(id), -- TODO: add on delete?
     FOREIGN KEY (owner_id) REFERENCES user(id) ON DELETE CASCADE -- TODO: change on delete?
 );
+
+ALTER TABLE `prosvita_db`.`article`
+    ADD COLUMN `article_status` VARCHAR(45) NOT NULL AFTER `updated_at`;
+
+DELIMITER //
+
+CREATE TRIGGER article_status_trigger
+    BEFORE INSERT ON article
+    FOR EACH ROW
+BEGIN
+    SET NEW.article_status = 'waiting';
+END;
+
+//
+
+DELIMITER ;

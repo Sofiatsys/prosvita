@@ -1,6 +1,7 @@
 package com.team.prosvita.service;
 
 import com.team.prosvita.entities.Article;
+import com.team.prosvita.entities.Status;
 import com.team.prosvita.entities.SubjectArea;
 import com.team.prosvita.entities.User;
 import com.team.prosvita.repository.ArticleRepository;
@@ -15,6 +16,15 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final SubjectAreaRepository subjectAreaRepository;
+
+
+    public List<Article> getArticlesByStatus(Status status) {
+        return articleRepository.findByArticleStatus(status);
+    }
+
+    public List<Article> getArticlesByStatuses(List<Status> statuses) {
+        return articleRepository.findByArticleStatusIn(statuses);
+    }
 
     @Autowired
     public ArticleService(ArticleRepository articleRepository, SubjectAreaRepository subjectAreaRepository) {
@@ -40,5 +50,6 @@ public class ArticleService {
     public Article update(Article article) { return articleRepository.save(article); }
 
     public void delete(Long id) { articleRepository.deleteById(id); }
+
 
 }
